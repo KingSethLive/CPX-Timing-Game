@@ -20,6 +20,7 @@ int speed = 1000;
 int buttonPinR = 5;
 int buttonPinL = 4;
 int sliderPin = 7;
+int score = 0;
 int randomPos;
 bool volatile buttonFlag = false;
 bool sliderVal;
@@ -66,6 +67,7 @@ void loop() {
   buttonFlag = false;
   //if you win
   if(lightPos == (randomPos+1)%10){
+    score++;
     speed -= 100;
     for(int i = 0; i < 10; i++){
       CircuitPlayground.setPixelColor(i, 0, 255, 0);
@@ -81,6 +83,7 @@ void loop() {
   }
   //If you lose
   else{
+    score =0;
     if(sliderVal){
       CircuitPlayground.playTone(60, 100);
       //Serial.println(sliderVal);
@@ -98,6 +101,8 @@ void loop() {
     delay(1000);
     CircuitPlayground.clearPixels();
   }
+  Serial.print("Score: ");
+  Serial.println(score);
 }
   
 void buttonInt(){
