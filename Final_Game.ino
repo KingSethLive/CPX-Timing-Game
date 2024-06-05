@@ -68,7 +68,10 @@ void loop() {
   //if you win
   if(lightPos == (randomPos+1)%10){
     score++;
-    speed -= 100;
+    if(speed > 100){
+      speed -= 100;
+    }
+    Serial.println(speed);
     for(int i = 0; i < 10; i++){
       CircuitPlayground.setPixelColor(i, 0, 255, 0);
     }
